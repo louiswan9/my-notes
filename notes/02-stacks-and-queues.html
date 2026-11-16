@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02. 資料結構：堆疊與佇列 - 我的學習筆記庫</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container">
+    <nav class="top-nav">
+      <a href="../index.html">← 返回首頁</a>
+    </nav>
+
+    <header class="article-header">
+      <div class="note-meta">
+        <span class="date">2026-11-16</span>
+        <span class="tag">資料結構</span>
+      </div>
+      <h1>02. 資料結構：堆疊與佇列</h1>
+    </header>
+
+    <section class="summary-box">
+      <h2>本篇重點摘要</h2>
+      <ul>
+        <li>堆疊採用後進先出（LIFO），佇列採用先進先出（FIFO）。</li>
+        <li>循序表示法使用連續記憶體；鏈結表示法透過節點指標連接資料。</li>
+        <li>鏈結串列插入或刪除時，已知位置（或前一個節點）後只需修改指標，不必搬移資料。</li>
+      </ul>
+    </section>
+
+    <main class="article-content">
+      <h2>堆疊與佇列</h2>
+      <h3>堆疊（Stack）</h3>
+      <p>堆疊遵循<strong>後進先出（Last In, First Out, LIFO）</strong>，新增和移除都在頂端進行。</p>
+      <ul>
+        <li><code>push</code>：將元素放到堆疊頂端。</li>
+        <li><code>pop</code>：移除並回傳頂端元素。</li>
+        <li><code>peek</code>：查看頂端元素但不移除。</li>
+      </ul>
+
+      <h3>佇列（Queue）</h3>
+      <p>佇列遵循<strong>先進先出（First In, First Out, FIFO）</strong>，從尾端加入元素，從前端移除元素。</p>
+      <ul>
+        <li><code>enqueue</code>：將元素加入佇列尾端。</li>
+        <li><code>dequeue</code>：移除並回傳佇列前端元素。</li>
+        <li><code>front</code>：查看佇列前端元素但不移除。</li>
+      </ul>
+
+      <h2>資料的表示方式</h2>
+      <h3>循序表示法（Sequential / Array）</h3>
+      <p>元素在記憶體中連續且等距排列，邏輯順序與實體位置相對應。陣列可依索引快速存取元素，但通常必須預先配置容量；容量過大會浪費空間，資料超過容量則可能發生溢位。</p>
+      <p>在陣列中間插入或刪除元素時，通常需要搬移後續元素，因此需要 <code>O(n)</code> 時間。以陣列實作佇列時，也可用環狀陣列重複利用前端空間，避免每次移除後搬移所有元素。</p>
+
+      <h3>鏈結表示法（Linked List）</h3>
+      <p>每個節點除了資料欄位（<code>data</code> / <code>info</code>），還包含指標欄位（<code>link</code> / <code>next</code>），指向下一個節點的記憶體位址。節點不必連續存放，串列尾端以 <code>NULL</code>（或以 0 表示空指標）標記。</p>
+      <p>鏈結串列不需要預先配置固定大小，能依需求增減節點。但若要按位置尋找節點，仍可能需要從頭逐一走訪，花費 <code>O(n)</code> 時間；只有在已知插入位置或前置節點時，指標修改才是 <code>O(1)</code>。</p>
+
+      <h2>單向鏈結串列的插入與刪除</h2>
+      <p>假設串列中 <code>FAT</code> 指向 <code>HAT</code>，要在兩者之間插入資料為 <code>GAT</code> 的新節點。</p>
+      <ol>
+        <li>取得一個未使用的節點 <code>a</code>，並將資料設為 <code>GAT</code>。</li>
+        <li><strong>先接後面：</strong>將 <code>a.next</code> 設為原本 <code>FAT.next</code> 指向的 <code>HAT</code>。</li>
+        <li><strong>再改前面：</strong>將 <code>FAT.next</code> 設為 <code>a</code>。</li>
+      </ol>
+      <pre><code>a.next = FAT.next  // a 指向 HAT
+FAT.next = a       // FAT 改為指向 a</code></pre>
+
+      <p>刪除 <code>GAT</code> 時，先找到它的前一個節點 <code>FAT</code>，再讓 <code>FAT.next</code> 指向 <code>GAT.next</code>（也就是 <code>HAT</code>），即可略過 <code>GAT</code>。實作時也要釋放被移除節點所占用的記憶體。</p>
+
+      <h2>堆疊與佇列的實作選擇</h2>
+      <ul>
+        <li>堆疊以陣列實作時，使用頂端索引管理；以鏈結串列實作時，可在串列頭端進行推入與彈出。</li>
+        <li>佇列以陣列實作時可使用環狀陣列；以鏈結串列實作時，維護前端與尾端指標即可在兩端操作。</li>
+        <li>陣列通常有較佳的索引存取效率與較少的指標額外空間；鏈結串列則較容易依需求增減元素，且在已知位置時插入、刪除不需搬移其他元素。</li>
+      </ul>
+    </main>
+
+    <footer class="site-footer">
+      <p><a href="01-welcome.html">上一篇：歡迎來到我的筆記網站</a></p>
+    </footer>
+  </div>
+</body>
+</html>

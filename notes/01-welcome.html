@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01. 歡迎來到我的筆記網站 - 我的學習筆記庫</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container">
+    <nav class="top-nav">
+      <a href="../index.html">← 返回首頁</a>
+    </nav>
+
+    <header class="article-header">
+      <div class="note-meta">
+        <span class="date">2026-11-16</span>
+        <span class="tag">網站建置</span>
+      </div>
+      <h1>01. 歡迎來到我的筆記網站：建站與開發規範</h1>
+    </header>
+
+    <section class="summary-box">
+      <h2>本篇重點摘要</h2>
+      <ul>
+        <li>本網站採用純靜態 HTML 與 CSS 建置，方便直接部署於 GitHub Pages。</li>
+        <li>透過根目錄的 <code>AGENTS.md</code> 定義架構與排版規則，確保每次新增筆記都有一致的格式。</li>
+      </ul>
+    </section>
+
+    <main class="article-content">
+      <h2>為什麼需要 AGENTS.md？</h2>
+      <p>在與 AI 協作開發時，如果沒有事先定義好規則，每次新增頁面都可能出現配色不同、路徑錯誤或忘記更新首頁連結的問題。</p>
+
+      <h2>新增筆記的標準流程</h2>
+      <ol>
+        <li>在 <code>notes/</code> 資料夾內建立新檔案（例如 <code>02-topic-name.html</code>）。</li>
+        <li>引入上層目錄的 <code>../style.css</code> 並套用相同的 HTML 結構。</li>
+        <li>回到 <code>index.html</code> 補上新筆記的標題、日期與連結卡片。</li>
+      </ol>
+
+      <h3>範例指令</h3>
+      <pre><code>請依照 AGENTS.md 的規範，幫我新增一篇關於「Git 基礎指令」的筆記。</code></pre>
+    </main>
+
+    <footer class="site-footer">
+      <p><a href="../index.html">返回筆記列表</a></p>
+    </footer>
+  </div>
+</body>
+</html>
